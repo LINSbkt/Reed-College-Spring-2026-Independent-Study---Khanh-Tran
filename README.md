@@ -3,33 +3,16 @@ Independent Study Project | Reed College | Spring 2025
 Advisor: Anna Ritz   
 Student: Tran Bao Khanh 
 ## Overview
-This project investigates whether spatial grounding via CellSAM-generated segmentation masks can improve Vision Language Model (VLM) performance on mitotic figure detection in H&E histopathology images.
+spatial grounding via CellSAM-generated segmentation masks can improve Vision Language Model (VLM) performance on mitotic figure detection in H&E histopathology images.
 
-Mitotic count is a standard clinical grading criterion for many cancer types. We frame this as a Visual Question Answering (VQA) task and compare:
+Mitotic count is a standard clinical grading criterion for many cancer types. 
+Visual Question Answering (VQA) task and compare:
 - **Baseline:** VLM answers from raw image crops
 - **Enhanced:** VLM answers with CellSAM segmentation masks
 
 ## Dataset
-We use the [MIDOG++](https://github.com/DeepMicroscopy/MIDOGpp) dataset — 503 histological specimens across 7 tumor types with 11,937 labeled mitotic figures.
+[MIDOG++](https://github.com/DeepMicroscopy/MIDOGpp) dataset — 503 histological specimens across 7 tumor types with 11,937 labeled mitotic figures.
 
 ## Project Structure
-```
-mitotic-vqa/
-├── data/          # MIDOG++ images and annotations
-├── notebooks/     # exploration and analysis notebooks
-├── src/           # source code
-├── results/       # metrics and figures
-└── docs/          # project documentation
-```
-
-## Setup
-```bash
-# Clone the repo
-git clone https://github.com/LINSbkt/Independent-Study-Project---Mitotic-vqa.git
-cd Independent-Study-Project---Mitotic-vqa
-
-# Install dependencies
-pip install -r requirements.txt
-```
 
 ## Progress
