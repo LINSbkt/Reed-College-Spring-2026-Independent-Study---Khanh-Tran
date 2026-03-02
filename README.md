@@ -1,9 +1,7 @@
 ## Segmentation-Guided Spatial Grounding for Mitotic Figure VQA
-
-## Independent Study Project | Reed College | Spring 2025
+Independent Study Project | Reed College | Spring 2025
 Advisor: Anna Ritz   
 Student: Tran Bao Khanh 
----
 ## Overview
 This project investigates whether spatial grounding via CellSAM-generated segmentation masks can improve Vision Language Model (VLM) performance on mitotic figure detection in H&E histopathology images.
 
