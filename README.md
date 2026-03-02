@@ -23,16 +23,6 @@ mitotic-vqa/
 └── docs/          # project documentation
 ```
 
-## Setup
-```bash
-# Clone the repo
-git clone https://github.com/LINSbkt/Independent-Study-Project---Mitotic-vqa.git
-cd Independent-Study-Project---Mitotic-vqa
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
 ## Progress
 
 
