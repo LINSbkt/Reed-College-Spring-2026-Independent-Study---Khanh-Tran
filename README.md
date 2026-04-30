@@ -4,25 +4,31 @@ Independent Study Project | Reed College | Spring 2025
 Advisor: Anna Ritz   
 Student: Tran Bao Khanh 
 ## Overview
-This project investigates whether spatial grounding via CellSAM-generated segmentation masks can improve Vision Language Model (VLM) performance on mitotic figure detection in H&E histopathology images.
+This project investigates whether spatial grounding — via bounding boxes or SAM segmentation masks — improves Vision-Language Model (VLM) performance on mitotic figure identification in H&E breast cancer histopathology.
 
-Mitotic count is a standard clinical grading criterion for many cancer types. We frame this as a Visual Question Answering (VQA) task and compare:
-- **Baseline:** VLM answers from raw image crops
-- **Enhanced:** VLM answers with CellSAM segmentation masks
+Mitotic figures are cells caught in active division. Their count per unit area is a standard component of tumour grading for breast carcinoma, but manual counting is laborious and subject to ~20% inter-observer disagreement. This study uses **Gemini 3.1 Flash** as the VLM and **SAM ViT-H** as the segmentation backbone, evaluated on the **MIDOG++ Domain 1a** dataset.
+
+## Research Question
+> Does providing a VLM with explicit spatial information (bounding boxes or segmentation masks) improve its ability to distinguish mitotic figures from visually similar hard negatives (apoptotic cells, hyperchromatic nuclei, pyknotic nuclei) in H&E histopathology?
 
 ## Dataset
-We use the [MIDOG++](https://github.com/DeepMicroscopy/MIDOGpp) dataset — 503 histological specimens across 7 tumor types with 11,937 labeled mitotic figures.
 
-## Project Structure
-```
-mitotic-vqa/
-├── data/          # MIDOG++ images and annotations
-├── notebooks/     # exploration and analysis notebooks
-├── src/           # source code
-├── results/       # metrics and figures
-└── docs/          # project documentation
-```
+**MIDOG++ Domain 1a — Human Breast Carcinoma**
+- 20 whole-slide image regions downloaded from the public MIDOG++ dataset
+- Image size: 7,215 × 5,412 pixels, RGBA, ~148 MB each
+- **388 total annotations: 141 mitotic figures, 247 hard negatives**
+- Ground truth provided as bounding boxes with binary category labels
+- All images digitized at 40× magnification (0.25 µm/pixel)
 
-## Progress
+## Repository Structure
 
+## Experimental Design
 
+## Results
+
+## Acknowledgements
+
+- Dr. Anna Ritz (Reed College) — supervision and guidance
+- MIDOG++ dataset — Aubreville et al., Scientific Data 2023
+- SAM — Kirillov et al., ICCV 2023
+- Gemini 3.1 Flash — Google DeepMind
