@@ -1,34 +1,92 @@
-## Segmentation-Guided Spatial Grounding for Mitotic Figure VQA
-Independent Study Project | Reed College | Spring 2025
+# Spatial Grounding for Mitotic Figure Identification with Vision-Language Models
 
-Advisor: Anna Ritz   
-Student: Tran Bao Khanh 
-## Overview
-This project investigates whether spatial grounding — via bounding boxes or SAM segmentation masks — improves Vision-Language Model (VLM) performance on mitotic figure identification in H&E breast cancer histopathology.
+Investigating whether bounding boxes or SAM segmentation masks improve 
+VLM performance on mitotic figure detection in H&E breast cancer histopathology.
 
-Mitotic figures are cells caught in active division. Their count per unit area is a standard component of tumour grading for breast carcinoma, but manual counting is laborious and subject to ~20% inter-observer disagreement. This study uses **Gemini 3.1 Flash** as the VLM and **SAM ViT-H** as the segmentation backbone, evaluated on the **MIDOG++ Domain 1a** dataset.
+Dataset: MIDOG++ Domain 1a (Human Breast Carcinoma)  
+Model: Gemini 3.1 Flash Lite (Google DeepMind) via API  
+Segmentation: Segment Anything Model 
 
-## Research Question
-> Does providing a VLM with explicit spatial information (bounding boxes or segmentation masks) improve its ability to distinguish mitotic figures from visually similar hard negatives (apoptotic cells, hyperchromatic nuclei, pyknotic nuclei) in H&E histopathology?
+---
+
+## Background
+
+Mitotic figures (cells caught in active division) are a key component of 
+histological grading in breast cancer. Distinguishing them from visually similar 
+hard negatives (apoptotic cells, hyperchromatic and pyknotic nuclei) is 
+difficult even for trained pathologists, with ~20% inter-observer disagreement.
+
+This project asks: can a general-purpose Vision-Language Model identify mitotic 
+figures from H&E image crops, and does providing spatial grounding (a bounding 
+box or SAM segmentation mask) improve its performance?
+
+---
 
 ## Dataset
 
-**MIDOG++ Domain 1a — Human Breast Carcinoma**
-- 20 whole-slide image regions downloaded from the public MIDOG++ dataset
-- Image size: 7,215 × 5,412 pixels, RGBA, ~148 MB each
-- **388 total annotations: 141 mitotic figures, 247 hard negatives**
-- Ground truth provided as bounding boxes with binary category labels
-- All images digitized at 40× magnification (0.25 µm/pixel)
+MIDOG++ (Aubreville et al., Scientific Data 2023)  
+- Domain 1a: 20 whole-slide image regions, human breast carcinoma  
+- 388 annotated cells: 141 mitotic figures, 247 hard negatives  
+- Images: 7,215 × 5,412 px TIFF, ~148 MB each, digitized at 40×  
+- Ground truth: bounding boxes with binary category labels
 
-## Repository Structure
+---
 
 ## Experimental Design
 
-## Results
+Each annotation was presented to the VLM as a 256×256 pixel crop under 
+three spatial grounding conditions:
+
+| Condition | Description |
+|---|---|
+| Raw Crop | No spatial grounding |
+| Bounding Box | Red bounding box drawn around target cell |
+| Mask | Semi-transparent SAM segmentation mask overlay |
+
+Four experiments varied prompting strategy and crop positioning:
+
+| Experiment | Crops | Prompts | Confidence score |
+|---|---|---|---|
+| 1 | Centered | Basic | No |
+| 2 | Centered | Improved (domain knowledge) | No |
+| 3 | Off-center | Improved | Yes |
+| 4 | Centered | Improved | Yes |
+
+---
+
+## Setup
+
+Python 3.12+
+Set your Gemini API key as an environment variable
+Download SAM
+
+---
+
+## Running the Experiments
+
+Run in order as each experiment builds on patch files and results from previous ones.
+
+Explore the dataset
+jupyter notebook notebooks/data_exploration.ipynb
+
+Download patches: patches, patches_exp3
+
+Experiment 1: basic prompts, centered crops
+python notebooks/experiment_1.py
+
+Experiment 2: improved prompts with domain knowledge
+python notebooks/experiment_2.py
+
+Experiment 3: off-center crops + confidence score
+python notebooks/experiment_3.py
+
+Experiment 4: centered crops + confidence score
+python notebooks/exp4.py
+
+---
 
 ## Acknowledgements
 
-- Dr. Anna Ritz (Reed College) — supervision and guidance
-- MIDOG++ dataset — Aubreville et al., Scientific Data 2023
-- SAM — Kirillov et al., ICCV 2023
-- Gemini 3.1 Flash — Google DeepMind
+Supervisor: Anna Ritz, Reed College  
+Dataset: Aubreville et al., MIDOG++ (Scientific Data, 2023)  
+SAM: Kirillov et al., Meta AI Research (ICCV, 2023)
