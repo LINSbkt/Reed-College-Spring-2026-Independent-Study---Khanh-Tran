@@ -48,7 +48,7 @@ Four experiments varied prompting strategy and crop positioning:
 | Experiment | Crops | Prompts | Confidence score |
 |---|---|---|---|
 | 1 | Centered | Basic | No |
-| 2 | Centered | Improved (domain knowledge) | No |
+| 2 | Centered | Improved | No |
 | 3 | Off-center | Improved | Yes |
 | 4 | Centered | Improved | Yes |
 
