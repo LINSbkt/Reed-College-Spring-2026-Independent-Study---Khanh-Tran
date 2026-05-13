@@ -11,7 +11,7 @@ client = genai.Client(api_key=API_KEY)
 
 MODEL_ID = "gemini-3.1-flash-lite-preview"
 
-# 2. Improved prompts with domain knowledge
+# 2. Improved prompts
 prompts = {
     'raw': """You are an expert pathology assistant analyzing H&E stained breast cancer tissue at 40x magnification.
 
@@ -104,7 +104,7 @@ def process_images():
                 results.append(row)
         print(f"Loaded {len(results)} existing results. Resuming...")
     
-    # Build sample list — all mitotic + all hard_negative per condition
+    # Build sample list 
     sample_plan = {}
     total_images = 0
     for folder_type in ['raw', 'bbox', 'mask']:
@@ -190,7 +190,7 @@ def process_images():
 
                         if "RESOURCE_EXHAUSTED" in error_str or "quota" in error_str.lower():
                             quota_exceeded = True
-                            print("Quota exceeded. Saving and stopping.")
+                            print("Quota exceeded..")
                             break
                         elif "503" in error_str or "UNAVAILABLE" in error_str:
                             if retry_count < max_retries:
@@ -208,7 +208,7 @@ def process_images():
                                 })
                         elif "rate" in error_str.lower():
                             if retry_count < max_retries:
-                                print("Rate limit. Retrying in 60s...")
+                                print("Rate limit. Retrying")
                                 time.sleep(60)
                             else:
                                 results.append({
@@ -234,7 +234,6 @@ def process_images():
                 # Rate limiting between successful requests
                 if success:
                     if processed_count % 15 == 0:
-                        print("--- Pausing 120s for rate limit ---")
                         time.sleep(120)
                     else:
                         time.sleep(10)
@@ -255,7 +254,6 @@ def process_images():
         writer.writeheader()
         writer.writerows(results)
 
-    print(f"\nDone! Results saved to results_improved.csv")
     print(f"Total predictions: {len(results)}")
 
 if __name__ == "__main__":

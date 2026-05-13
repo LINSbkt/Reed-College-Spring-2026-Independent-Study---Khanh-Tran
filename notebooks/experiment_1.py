@@ -122,7 +122,7 @@ def process_images():
                     # 3. Rate Limiting Logic (Crucial for Free Tier)
                     # 15 RPM means 1 request every 4 seconds. We use 5 to be safe.
                     if processed_count % 15 == 0:
-                        print("--- Reached minute limit, pausing for 60 seconds ---")
+                        print("Reached minute limit, pausing")
                         time.sleep(60)
                     else:
                         time.sleep(5) 
@@ -140,21 +140,11 @@ def process_images():
                     # Check for quota exceeded
                     if "RESOURCE_EXHAUSTED" in str(e) or "quota exceeded" in str(e).lower():
                         quota_exceeded = True
-                        print("Daily quota exceeded. Stopping processing to save partial results.")
                         break
                     # If we hit a rate limit error, wait longer
                     elif "rate limit" in str(e).lower():
-                        print("Rate limit hit, waiting 60 seconds...")
+                        print("Rate limit hit")
                         time.sleep(60)
-    
-    # Save results to CSV
-    with open('results.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['folder_type', 'subfolder', 'filename', 'response', 'yes_no', 'explanation']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(results)
-    
-    print(f"Processing complete. Results saved to results.csv")
     
     # Save results to CSV
     with open('results.csv', 'w', newline='', encoding='utf-8') as csvfile:
