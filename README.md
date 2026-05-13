@@ -68,8 +68,8 @@ Run in order as each experiment builds on patch files and results from previous 
 
 Explore the dataset
 jupyter notebook notebooks/data_exploration.ipynb
-
-Download patches: patches, patches_exp3
+jupyter notebook notebooks/data_experiment3.ipynb 
+OR: Download patches: patches, patches_exp3
 
 Experiment 1: basic prompts, centered crops
 python notebooks/experiment_1.py
